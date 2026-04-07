@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FAQ | AITECH + SONIC AI</title>
+  <style>
+    :root {
+      --bg-primary: #121212;
+      --bg-secondary: #1e1e1e;
+      --bg-card: #252525;
+      --text-primary: #f5f5f5;
+      --text-secondary: #b0b0b0;
+      --accent-yellow: #ffd700;
+      --accent-violet: #a78bfa;
+      --border: #3a3a3a;
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+    
+    nav {
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+    }
+    
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--text-primary), var(--accent-violet));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+    }
+    
+    .back-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    
+    .back-link:hover {
+      color: var(--accent-yellow);
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    
+    .subtitle {
+      text-align: center;
+      color: var(--text-secondary);
+      margin-bottom: 3rem;
+    }
+    
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+    
+    .faq-item:hover {
+      border-color: var(--accent-violet);
+    }
+    
+    .faq-question {
+      padding: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+    
+    .faq-question:hover {
+      background: var(--bg-secondary);
+    }
+    
+    .faq-icon {
+      font-size: 1.5rem;
+      transition: transform 0.3s;
+    }
+    
+    .faq-item.active .faq-icon {
+      transform: rotate(45deg);
+    }
+    
+    .faq-answer {
+      padding: 0 1.5rem;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      color: var(--text-secondary);
+    }
+    
+    .faq-item.active .faq-answer {
+      padding: 0 1.5rem 1.5rem;
+      max-height: 500px;
+    }
+    
+    footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      color: var(--text-secondary);
+      margin-top: 3rem;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-container">
+      <a href="index.html" class="logo">AITECH + SONIC</a>
+      <a href="index.html" class="back-link">← Retour à l'accueil</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1>Questions Fréquentes</h1>
+    <p class="subtitle">Tout ce que vous devez savoir sur notre service de copy trading</p>
+    
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>Quel est le dépôt minimum requis ?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <p>Le dépôt minimum pour commencer est de 250$ (~230€). Ce montant vous permet de bénéficier de notre système de copy trading avec un effet de levier optimal tout en limitant les risques.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>Comment fonctionnent les retraits ?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <p>Les retraits sont disponibles chaque vendredi. Vous pouvez retirer vos gains à tout moment directement depuis votre compte TAG. Les fonds sont transférés sous 24-48h selon votre méthode de paiement.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>Quels sont les risques ?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <p>Le trading comporte des risques de perte en capital. Notre système maintient un drawdown maximum de 0,86% grâce à une gestion stricte du risque. Nous recommandons d'investir uniquement ce que vous pouvez vous permettre de perdre.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>Comment sont calculées les commissions ?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <p>Nous appliquons une commission de 20% uniquement sur les profits générés. Si vous ne gagnez pas, vous ne payez pas de commission. Cette commission est automatiquement déduite de vos gains hebdomadaires.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>Puis-je suivre mes trades en temps réel ?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <p>Oui, absolument ! Vous avez un accès complet à votre compte MetaTrader 5. Vous pouvez suivre toutes les positions ouvertes, l'historique des trades et les performances en temps réel, 24h/24.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>Quelle est la performance moyenne mensuelle ?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <p>Nous visons une performance moyenne de 1,5% par mois sur capital amplifié. Cette performance est basée sur nos résultats historiques mais n'est pas garantie. Les marchés financiers comportent des risques.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>Ai-je besoin de compétences en trading ?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <p>Non, aucune compétence n'est requise. Notre système de copy trading s'occupe de tout. Vous déposez vos fonds et nous gérons les opérations. Vous recevez simplement vos gains chaque semaine.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>Comment créer mon compte MT5 ?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <p>Cliquez sur le bouton "Créer mon compte" sur la page d'accueil. Vous serez redirigé vers le formulaire d'inscription AITECH. Le processus prend environ 5 minutes. Une fois validé, vous pourrez effectuer votre dépôt.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 AITECH + SONIC AI. Tous droits réservés.</p>
+    <p style="margin-top: 0.5rem;"><a href="index.html" style="color: var(--accent-violet);">Retour à l'accueil</a></p>
+  </footer>
+
+  <script>
+    function toggleFaq(element) {
+      const item = element.parentElement;
+      const isActive = item.classList.contains('active');
+      
+      document.querySelectorAll('.faq-item').forEach(faq => {
+        faq.classList.remove('active');
+      });
+      
+      if (!isActive) {
+        item.classList.add('active');
+      }
+    }
+  </script>
+</body>
+</html>

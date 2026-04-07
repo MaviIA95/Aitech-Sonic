@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact | AITECH + SONIC AI</title>
+  <style>
+    :root {
+      --bg-primary: #121212;
+      --bg-secondary: #1e1e1e;
+      --bg-card: #252525;
+      --text-primary: #f5f5f5;
+      --text-secondary: #b0b0b0;
+      --accent-yellow: #ffd700;
+      --accent-yellow-hover: #ffed4e;
+      --accent-violet: #a78bfa;
+      --accent-green: #4ade80;
+      --border: #3a3a3a;
+      --input-bg: #1a1a1a;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+    
+    nav {
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--text-primary), var(--accent-violet));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+    }
+    
+    .back-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+    
+    .back-link:hover {
+      color: var(--accent-yellow);
+    }
+    
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      text-align: center;
+      color: var(--accent-yellow);
+    }
+    
+    .subtitle {
+      text-align: center;
+      color: var(--text-secondary);
+      margin-bottom: 3rem;
+    }
+    
+    .contact-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 1rem;
+      background: var(--input-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+    
+    input:focus,
+    textarea:focus,
+    select:focus {
+      outline: none;
+      border-color: var(--accent-violet);
+      box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.1);
+    }
+    
+    textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+    
+    .submit-btn {
+      width: 100%;
+      padding: 1rem;
+      background: var(--accent-yellow);
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .submit-btn:hover {
+      background: var(--accent-yellow-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
+    }
+    
+    .contact-info {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2rem;
+      text-align: center;
+    }
+    
+    .contact-info h2 {
+      margin-bottom: 1.5rem;
+      color: var(--accent-yellow);
+    }
+    
+    .info-item {
+      margin: 1rem 0;
+      color: var(--text-secondary);
+    }
+    
+    .info-item strong {
+      color: var(--text-primary);
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+    
+    .info-item a {
+      color: var(--accent-green);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    
+    .info-item a:hover {
+      color: var(--accent-yellow);
+      text-decoration: underline;
+    }
+    
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+    
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      background: var(--bg-secondary);
+      border-radius: 50px;
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+    
+    .social-link.whatsapp:hover {
+      background: #25D366;
+      color: white;
+    }
+    
+    .social-link.telegram:hover {
+      background: #0088cc;
+      color: white;
+    }
+    
+    footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      color: var(--text-secondary);
+      margin-top: 3rem;
+    }
+    
+    footer a {
+      color: var(--accent-violet);
+      text-decoration: none;
+    }
+    
+    .success-message {
+      display: none;
+      background: rgba(74, 222, 128, 0.1);
+      border: 1px solid var(--accent-green);
+      color: var(--accent-green);
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 2rem 1rem; }
+      h1 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-container">
+      <a href="index.html" class="logo">AITECH + SONIC</a>
+      <a href="index.html" class="back-link">← Retour à l'accueil</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1>Contactez-nous</h1>
+    <p class="subtitle">Une question ? Nous sommes là pour vous répondre</p>
+    
+    <div class="contact-card">
+      <!-- FORMULAIRE AVEC FORMSUBMIT -->
+      <form action="https://formsubmit.co/maviservices20@gmail.com" method="POST">
+        
+        <!-- Configuration FormSubmit (champs cachés) -->
+        <input type="hidden" name="_subject" value="📩 Nouveau message - AITECH + SONIC AI">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_autoresponse" value="Merci pour votre message ! Nous vous répondrons sous 24h.">
+        
+        <div class="form-group">
+          <label for="name">Nom complet *</label>
+          <input type="text" id="name" name="name" required placeholder="Jean Dupont">
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input type="email" id="email" name="email" required placeholder="jean@exemple.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="subject">Sujet *</label>
+          <select id="subject" name="subject" required>
+            <option value="">Choisissez un sujet</option>
+            <option value="compte">Création de compte</option>
+            <option value="depot">Dépôt / Retrait</option>
+            <option value="performance">Performances</option>
+            <option value="technique">Problème technique</option>
+            <option value="partenariat">Partenariat / Filleuls</option>
+            <option value="autre">Autre</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="message">Message *</label>
+          <textarea id="message" name="message" required placeholder="Décrivez votre demande..."></textarea>
+        </div>
+        
+        <button type="submit" class="submit-btn">Envoyer le message ✉️</button>
+      </form>
+    </div>
+    
+    <!-- INFOS CONTACT + RÉSEAUX -->
+    <div class="contact-info">
+      <h2>Autres Moyens de Contact</h2>
+      
+      <div class="info-item">
+        <strong>📧 Email</strong>
+        maviservices20@gmail.com
+      </div>
+      
+      <div class="info-item">
+        <strong>🕐 Horaires</strong>
+        Lundi - Vendredi : 9h00 - 18h00
+      </div>
+      
+      <div class="info-item">
+        <strong>⏱️ Temps de réponse</strong>
+        Sous 24 heures ouvrées
+      </div>
+      
+      <!-- LIENS WHATSAPP & TELEGRAM -->
+      <div class="social-links">
+        <a href="https://api.whatsapp.com/send?phone=+33680244077" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           class="social-link whatsapp">
+          💬 WhatsApp
+        </a>
+        <a href="https://t.me/MaviServ" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           class="social-link telegram">
+          ✈️ Telegram
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 AITECH + SONIC AI. Tous droits réservés.</p>
+    <p style="margin-top: 0.5rem;">
+      <a href="index.html">← Retour à l'accueil</a>
+    </p>
+  </footer>
+
+</body>
+</html>

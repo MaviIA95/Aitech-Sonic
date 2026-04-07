@@ -21,7 +21,7 @@
 
 ## 🔗 Liens
 
-- 🌐 Site officiel : [https://ton-pseudo.github.io/aitech-sonic/](https://ton-pseudo.github.io/aitech-sonic/)
+- 🌐 Site officiel : [https://maviia95.github.io/aitech-sonic/](https://maviia95.github.io/aitech-sonic/)
 - 📧 Email : maviservices20@gmail.com
 - 💬 WhatsApp : +33 6 80 24 40 77
 - ✈️ Telegram : [@MaviServ](https://t.me/MaviServ)

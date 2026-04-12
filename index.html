@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="AITECH + SONIC AI - Copy Trading professionnel sur MetaTrader 5. Performance 1,5% mensuel, 80% de trades gagnants."/>
+  <title>AITECH + SONIC AI | Copy Trading Pro MT5</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+  
+  <style>
+    :root {
+      --bg-primary: #121212;
+      --bg-secondary: #1e1e1e;
+      --bg-card: #252525;
+      --bg-hover: #2a2a2a;
+      --text-primary: #f5f5f5;
+      --text-secondary: #b0b0b0;
+      --accent-yellow: #ffd700;
+      --accent-yellow-hover: #ffed4e;
+      --accent-green: #4ade80;
+      --accent-red: #f87171;
+      --accent-violet: #a78bfa;
+      --accent-violet-light: #c4b5fd;
+      --border: #3a3a3a;
+      --shadow: 0 4px 20px rgba(0,0,0,0.4);
+      --shadow-lg: 0 10px 40px rgba(0,0,0,0.6);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(18, 18, 18, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      padding: 1rem 0;
+    }
+    
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--text-primary), var(--accent-violet));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+    }
+    
+    .nav-links a:hover { color: var(--accent-yellow); }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent-yellow);
+      transition: width 0.3s;
+    }
+    .nav-links a:hover::after { width: 100%; }
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .hero {
+      margin-top: 70px;
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: url('assets/images/trading-bg.jpg') center/cover;
+      opacity: 0.15;
+      z-index: 0;
+    }
+    
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(167,139,250,0.2) 0%, transparent 70%);
+      top: -200px;
+      right: -200px;
+      z-index: 0;
+    }
+    
+    .hero-content {
+      max-width: 900px;
+      text-align: center;
+      z-index: 1;
+      animation: fadeInUp 0.8s ease;
+    }
+    
+    .hero-badge {
+      display: inline-block;
+      background: var(--bg-card);
+      border: 1px solid var(--accent-violet);
+      color: var(--accent-violet-light);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+    
+    .hero h1 {
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      line-height: 1.1;
+      background: linear-gradient(90deg, var(--text-primary), var(--accent-violet));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      margin-bottom: 2.5rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .cta-btn {
+      background: var(--accent-yellow);
+      color: #000;
+      font-weight: 700;
+      padding: 1rem 2.5rem;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+      text-decoration: none;
+      display: inline-block;
+    }
+    
+    .cta-btn:hover {
+      background: var(--accent-yellow-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(255, 215, 0, 0.5);
+    }
+    
+    .cta-secondary {
+      background: transparent;
+      color: var(--text-primary);
+      border: 2px solid var(--border);
+    }
+    
+    .cta-secondary:hover {
+      border-color: var(--accent-violet);
+      background: var(--bg-card);
+    }
+
+    .metrics {
+      padding: 5rem 2rem;
+      background: var(--bg-secondary);
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+    
+    .section-subtitle {
+      text-align: center;
+      color: var(--text-secondary);
+      margin-bottom: 3rem;
+      font-size: 1.1rem;
+    }
+    
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .metric-card {
+      background: var(--bg-card);
+      padding: 2rem;
+      border-radius: 20px;
+      text-align: center;
+      border: 1px solid var(--border);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .metric-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-violet), var(--accent-yellow));
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+    
+    .metric-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent-violet);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .metric-card:hover::before { transform: scaleX(1); }
+    .metric-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .metric-value {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--accent-yellow);
+      margin: 0.5rem 0;
+    }
+    .metric-label {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    .metric-sub {
+      font-size: 0.9rem;
+      color: var(--accent-violet-light);
+      font-weight: 500;
+    }
+
+    .videos {
+      padding: 5rem 2rem;
+      background: var(--bg-primary);
+    }
+    
+    .videos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+    
+    .video-card {
+      background: var(--bg-card);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: var(--transition);
+    }
+    
+    .video-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--accent-violet);
+    }
+    
+    .video-thumbnail {
+      position: relative;
+      aspect-ratio: 16/9;
+      background: var(--bg-hover);
+      cursor: pointer;
+      overflow: hidden;
+    }
+    
+    .video-thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .play-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80px;
+      height: 80px;
+      background: var(--accent-yellow);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      z-index: 1;
+    }
+    
+    .play-button::after {
+      content: '▶';
+      color: #000;
+      font-size: 2rem;
+      margin-left: 5px;
+    }
+    
+    .video-thumbnail:hover .play-button {
+      transform: translate(-50%, -50%) scale(1.1);
+      box-shadow: 0 6px 30px rgba(255, 215, 0, 0.5);
+    }
+    
+    .video-info {
+      padding: 1.5rem;
+    }
+    
+    .video-info h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+    
+    .video-info p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .testimonials {
+      padding: 5rem 2rem;
+      background: var(--bg-secondary);
+      overflow: hidden;
+    }
+    
+    .carousel-container {
+      max-width: 800px;
+      margin: 3rem auto 0;
+      position: relative;
+    }
+    
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+    
+    .testimonial-card {
+      min-width: 100%;
+      padding: 2rem;
+      background: var(--bg-card);
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+    
+    .testimonial-text {
+      font-size: 1.2rem;
+      font-style: italic;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
+    }
+    
+    .testimonial-author {
+      font-weight: 700;
+      color: var(--accent-yellow);
+      margin-bottom: 0.3rem;
+    }
+    
+    .testimonial-role {
+      color: var(--accent-violet-light);
+      font-size: 0.9rem;
+    }
+    
+    .testimonial-commission {
+      display: inline-block;
+      background: rgba(167, 139, 250, 0.2);
+      color: var(--accent-violet);
+      padding: 0.3rem 0.8rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      margin-top: 1rem;
+      font-weight: 600;
+    }
+    
+    .carousel-controls {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    
+    .carousel-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 1.2rem;
+    }
+    
+    .carousel-btn:hover {
+      background: var(--accent-violet);
+      border-color: var(--accent-violet);
+      transform: scale(1.1);
+    }
+    
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+    
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--border);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .dot.active {
+      background: var(--accent-yellow);
+      width: 30px;
+      border-radius: 6px;
+    }
+
+    .features {
+      padding: 5rem 2rem;
+      background: var(--bg-primary);
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .feature-card {
+      padding: 2rem;
+      background: var(--bg-card);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      transition: var(--transition);
+    }
+    
+    .feature-card:hover {
+      border-color: var(--accent-violet);
+      transform: translateY(-3px);
+    }
+    
+    .feature-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .feature-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.8rem;
+      color: var(--text-primary);
+    }
+    .feature-card p {
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .cta-section {
+      padding: 5rem 2rem;
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-card) 100%);
+      text-align: center;
+    }
+    
+    .cta-box {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 3rem;
+      background: var(--bg-primary);
+      border-radius: 24px;
+      border: 2px solid var(--accent-violet);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .cta-box h2 { font-size: 2.2rem; margin-bottom: 1rem; }
+    .cta-box p {
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+    .cta-highlight {
+      color: var(--accent-yellow);
+      font-weight: 700;
+    }
+
+    footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      padding: 3rem 2rem 1.5rem;
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+      margin-bottom: 2rem;
+    }
+    
+    .footer-section h3 {
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+    
+    .footer-section p,
+    .footer-section a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      line-height: 1.8;
+      transition: var(--transition);
+    }
+    
+    .footer-section a:hover { color: var(--accent-yellow); }
+    
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+    
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-legal-link {
+      color: #e5e5e5 !important;
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      display: inline-block;
+    }
+    
+    .footer-legal-link:hover {
+      color: var(--accent-yellow) !important;
+      text-decoration: underline;
+      transform: translateX(3px);
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--bg-secondary);
+        flex-direction: column;
+        padding: 1rem 2rem;
+        border-bottom: 1px solid var(--border);
+        gap: 1rem;
+      }
+      .nav-links.active { display: flex; }
+      .mobile-menu-btn { display: block; }
+      .hero {
+        margin-top: 60px;
+        min-height: 75vh;
+      }
+      .hero h1 { font-size: 2rem; }
+      .videos-grid { grid-template-columns: 1fr; }
+      .metrics-grid { grid-template-columns: 1fr; }
+      .section-title { font-size: 1.8rem; }
+    }
+
+    .text-gradient {
+      background: linear-gradient(90deg, var(--accent-yellow), var(--accent-violet));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .mb-2 { margin-bottom: 2rem; }
+    .mt-2 { margin-top: 2rem; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-container">
+      <div class="logo">AITECH + SONIC</div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="#performances">Performances</a></li>
+        <li><a href="#videos">Vidéos</a></li>
+        <li><a href="#temoignages">Témoignages</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">🚀 Copy Trading Nouvelle Génération</div>
+      <h1>Optimisez Vos Investissements avec l'IA</h1>
+      <p>Rejoignez AITECH + SONIC AI et bénéficiez d'un copy trading professionnel sur MetaTrader 5. Performance constante, risque maîtrisé, disponible 5j/7 sans compétences requises.</p>
+      <div class="hero-buttons">
+        <a href="https://aitech.sonicfunnel.com/fr?e=F031PrBUPoNTo-vP2XTzsuetnNBhbZxqcu6v_DoEN-o" class="cta-btn" target="_blank" rel="noopener noreferrer">Créer mon compte Gratuit →</a>
+        <a href="#videos" class="cta-btn cta-secondary">Voir les vidéos</a>
+      </div>
+    </div>
+  </section>
+
+ <section class="metrics" id="performances">
+  <div class="container">
+    <h2 class="section-title fade-in">Nos Performances</h2>
+    <p class="section-subtitle fade-in">Des résultats concrets et transparents</p>
+    <div class="metrics-grid">
+      <div class="metric-card fade-in">
+        <div class="metric-icon">📈</div>
+        <div class="metric-label">Performance Mensuelle</div>
+        <div class="metric-value">1,5%</div>
+        <div class="metric-sub">Sur capital amplifié</div>
+      </div>
+      
+      <div class="metric-card fade-in" style="border: 2px solid var(--accent-yellow); overflow: visible; position: relative;">
+  <!-- Badge OFFRE LIMITÉE - Positionné avec top: -15px pour dépasser -->
+  <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--accent-yellow); color: #000; padding: 0.3rem 1rem; border-radius: 20px; font-size: 0.75rem; font-weight: 700; white-space: nowrap; z-index: 10; box-shadow: 0 2px 10px rgba(0,0,0,0.5);">
+    ⚡ OFFRE LIMITÉE
+  </div>
+  
+  <div class="metric-icon">⚡</div>
+  <div class="metric-label">Amplification</div>
+  <div class="metric-value">X12 / X24</div>
+  <div class="metric-sub">Via Liquidity Providers</div>
+  
+  <div style="margin-top: 0.8rem; padding: 0.6rem; background: rgba(255, 215, 0, 0.15); border-radius: 8px; border-left: 3px solid var(--accent-yellow);">
+    <div style="color: var(--accent-yellow); font-size: 0.85rem; font-weight: 600; line-height: 1.4;">
+      ⚡ Pour le X24 :<br>offre limitée au 30/04/2026
+    </div>
+  </div>
+</div>
+      
+      <div class="metric-card fade-in">
+        <div class="metric-icon">✅</div>
+        <div class="metric-label">Trades Gagnants</div>
+        <div class="metric-value" style="color:var(--accent-green)">~80%</div>
+        <div class="metric-sub">Taux de réussite moyen</div>
+      </div>
+      
+      <div class="metric-card fade-in">
+        <div class="metric-icon">🛡️</div>
+        <div class="metric-label">Drawdown Max</div>
+        <div class="metric-value" style="color:var(--accent-red)">0,86%</div>
+        <div class="metric-sub">Gestion stricte du risque</div>
+      </div>
+      
+      <div class="metric-card fade-in">
+        <div class="metric-icon">📱</div>
+        <div class="metric-label">Plateforme</div>
+        <div class="metric-value">MT5</div>
+        <div class="metric-sub">MetaTrader 5</div>
+      </div>
+      
+      <div class="metric-card fade-in">
+        <div class="metric-icon">🕐</div>
+        <div class="metric-label">Disponibilité</div>
+        <div class="metric-value">5j/7</div>
+        <div class="metric-sub">Trading actif Lun-Ven</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <section class="videos" id="videos">
+    <div class="container">
+      <h2 class="section-title fade-in">Découvrez Notre Univers</h2>
+      <p class="section-subtitle fade-in">Témoignages et présentation de la technologie SONIC AI</p>
+      <div class="videos-grid">
+        <div class="video-card fade-in">
+          <div class="video-thumbnail" onclick="window.open('https://vimeo.com/1163043448', '_blank')">
+            <div class="play-button"></div>
+            <img src="assets/images/Vignette vidéo janluc.png" alt="Témoignage Janluc" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <div class="video-info">
+            <h3>Témoignage de Janluc</h3>
+            <p>Découvrez le retour d'expérience de Janluc, trader utilisant notre système de copy trading.</p>
+          </div>
+        </div>
+        <div class="video-card fade-in">
+          <div class="video-thumbnail" onclick="openVideo('8EYCEsP0l8I')">
+            <div class="play-button"></div>
+            <img src="assets/images/Vignette vidéo SONIC IA.png" alt="Présentation SONIC AI" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <div class="video-info">
+            <h3>Présentation SONIC AI</h3>
+            <p>Plongez au cœur de la technologie SONIC AI et découvrez comment notre IA analyse les marchés.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="container">
+      <h2 class="section-title fade-in">Pourquoi Nous Choisir ?</h2>
+      <p class="section-subtitle fade-in">Une solution complète pour optimiser vos investissements</p>
+      <div class="features-grid">
+        <div class="feature-card fade-in">
+          <div class="feature-icon">🤖</div>
+          <h3>Intelligence Artificielle</h3>
+          <p>Algorithmes avancés analysant les marchés 24h/24.</p>
+        </div>
+        <div class="feature-card fade-in">
+          <div class="feature-icon">🔒</div>
+          <h3>Sécurité Maximale</h3>
+          <p>Vos fonds restent sur votre compte MetaTrader 5.</p>
+        </div>
+        <div class="feature-card fade-in">
+          <div class="feature-icon">📊</div>
+          <h3>Transparence Totale</h3>
+          <p>Accès en temps réel à toutes les positions.</p>
+        </div>
+        <div class="feature-card fade-in">
+          <div class="feature-icon">🎓</div>
+          <h3>Accessible à Tous</h3>
+          <p>Aucune compétence en trading requise.</p>
+        </div>
+        <div class="feature-card fade-in">
+          <div class="feature-icon">💰</div>
+          <h3>Capital Amplifié</h3>
+          <p>Effet de levier via nos Liquidity Providers.</p>
+        </div>
+        <div class="feature-card fade-in">
+          <div class="feature-icon">🌍</div>
+          <h3>Disponible Mondialement</h3>
+          <p>Accédez à votre compte depuis n'importe où.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials" id="temoignages">
+    <div class="container">
+      <h2 class="section-title fade-in">Ils Nous Font Confiance</h2>
+      <p class="section-subtitle fade-in">Découvrez les retours d'expérience de nos utilisateurs</p>
+      <div class="carousel-container fade-in">
+        <div class="carousel-track" id="carouselTrack">
+          <div class="testimonial-card">
+            <p class="testimonial-text">"J'ai commencé avec 250$ il y a 6 mois et les résultats sont au rendez-vous. Je recommande vivement !"</p>
+            <div class="testimonial-author">Marc D.</div>
+            <div class="testimonial-role">Investisseur depuis 6 mois</div>
+            <div class="testimonial-commission">💎 Commission: 20% sur profits</div>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-text">"Enfin un système de copy trading transparent ! Les performances sont stables."</p>
+            <div class="testimonial-author">Sophie L.</div>
+            <div class="testimonial-role">Trader débutante</div>
+            <div class="testimonial-commission">💎 Commission: 20% sur profits</div>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-text">"L'IA fait vraiment la différence. Je gagne en moyenne 1,5% par mois sans stress."</p>
+            <div class="testimonial-author">Thomas B.</div>
+            <div class="testimonial-role">Investisseur actif</div>
+            <div class="testimonial-commission">💎 Commission: 20% sur profits</div>
+          </div>
+        </div>
+        <div class="carousel-controls">
+          <button class="carousel-btn" onclick="moveCarousel(-1)">‹</button>
+          <button class="carousel-btn" onclick="moveCarousel(1)">›</button>
+        </div>
+        <div class="carousel-dots">
+          <span class="dot active" onclick="goToSlide(0)"></span>
+          <span class="dot" onclick="goToSlide(1)"></span>
+          <span class="dot" onclick="goToSlide(2)"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section" id="debuter">
+    <div class="cta-box fade-in">
+      <h2>Prêt à Commencer ?</h2>
+      <p>Rejoignez-nous dès aujourd'hui et commencez à générer des revenus passifs.</p>
+      <p style="margin-bottom: 1.5rem;"><span class="cta-highlight">Dépôt minimum : 250$ (~230€)</span> • Retraits chaque vendredi</p>
+      <a href="https://aitech.sonicfunnel.com/fr?e=F031PrBUPoNTo-vP2XTzsuetnNBhbZxqcu6v_DoEN-o" class="cta-btn" target="_blank" rel="noopener noreferrer">Créer mon compte Gratuit →</a>
+      <p style="margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-secondary);">
+        📧 Support : <a href="mailto:maviservices20@gmail.com" style="color:var(--accent-yellow);">maviservices20@gmail.com</a>
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>AITECH + SONIC AI</h3>
+        <p>Leader du copy trading intelligent sur MetaTrader 5.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Liens Rapides</h3>
+        <p><a href="index.html">Accueil</a></p>
+        <p><a href="#performances">Performances</a></p>
+        <p><a href="faq.html">FAQ</a></p>
+        <p><a href="contact.html">Contact</a></p>
+      </div>
+      <div class="footer-section">
+        <h3>Légal</h3>
+        <p><a href="mentions-legales.html" class="footer-legal-link">Mentions Légales</a></p>
+        <p><a href="confidentialite.html" class="footer-legal-link">Confidentialité</a></p>
+        <p><a href="cgu.html" class="footer-legal-link">CGU</a></p>
+        <p><a href="avertissement-risques.html" class="footer-legal-link">Risques</a></p>
+      </div>
+      <div class="footer-section">
+        <h3>Contact</h3>
+        <p>📧 maviservices20@gmail.com</p>
+        <p>🕐 Lun-Ven : 9h-18h</p>
+        <p style="margin-top: 1rem;">
+          <a href="https://api.whatsapp.com/send?phone=+33680244077" target="_blank" rel="noopener noreferrer" class="footer-legal-link" style="display: inline-flex; align-items: center; gap: 0.5rem; margin-right: 1rem;">
+            <span style="font-size: 1.3rem;">💬</span> WhatsApp
+          </a>
+          <a href="https://t.me/MaviServ" target="_blank" rel="noopener noreferrer" class="footer-legal-link" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+            <span style="font-size: 1.3rem;">✈️</span> Telegram
+          </a>
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-links">
+        <a href="mentions-legales.html" class="footer-legal-link">Mentions Légales</a>
+        <a href="confidentialite.html" class="footer-legal-link">Confidentialité</a>
+        <a href="cgu.html" class="footer-legal-link">CGU</a>
+        <a href="avertissement-risques.html" class="footer-legal-link">Risques</a>
+      </div>
+      <p>&copy; 2026 AITECH + SONIC AI. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('active');
+    }
+
+    function openVideo(videoId) {
+      window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
+    }
+
+    let currentSlide = 0;
+    const track = document.getElementById('carouselTrack');
+    const dots = document.querySelectorAll('.dot');
+    const totalSlides = 3;
+
+    function updateCarousel() {
+      track.style.transform = `translateX(-${currentSlide * 100}%)`;
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentSlide);
+      });
+    }
+
+    function moveCarousel(direction) {
+      currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+      updateCarousel();
+    }
+
+    function goToSlide(index) {
+      currentSlide = index;
+      updateCarousel();
+    }
+
+    setInterval(() => moveCarousel(1), 6000);
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href !== '#' && href.length > 1) {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      });
+    });
+
+    window.getTradingData = function() {
+      return {
+        monthlyPerformance: 1.5,
+        winRate: 80,
+        maxDrawdown: 0.86,
+        leverage: 'X12/X24',
+        platform: 'MT5'
+      };
+    };
+  </script>
+</body>
+</html>
